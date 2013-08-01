@@ -1,13 +1,11 @@
 PHP Rest API Client 
 ================
-This project ecloses a short list of REST API integration samples in PHP.
+PHP REST API integration/implementation samples
 
 Requirements
 ------------------------
-* .NET framework 4.0
-* Visual Studio 2010
-* A valid MailUp account ( trial accounts allowed )
-* API application keys ( required only for final deployments )
+
+
 
 notes : 
 * For further API information, please visit [MailUp REST API Help] [1] 
@@ -31,7 +29,7 @@ This project encloses a short list of pre definied samples describing some of th
 
 Debugging tool 
 ------------------------
-Current project includes a web application for quick and puntual services interrogation 
+
 
 Notes
 ------------------------
