@@ -4,7 +4,8 @@ PHP REST API integration/implementation samples
 
 Requirements
 ------------------------
-
+* A valid MailUp account ( trial accounts allowed )
+* API application keys ( required only for final deployments )
 
 
 notes : 
