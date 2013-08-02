@@ -6,7 +6,6 @@
     $MAILUP_CLIENT_SECRET = "bfe2ec3c-acab-4149-9297-a5901e5b244e";
     $MAILUP_CALLBACK_URI = "http://127.0.0.1/index.php";
     
-    
     // Initializing MailUpClient
     $mailUp = new MailUpClient($MAILUP_CLIENT_ID, $MAILUP_CLIENT_SECRET, $MAILUP_CALLBACK_URI);
     
@@ -14,14 +13,13 @@
     if (isset($_REQUEST["LogOn"])) { // LogOn button clicked
         $mailUp->logOn();
     } else if (isset($_REQUEST["code"])) { // code returned by MailUp
-		$mailUp->retreiveAccessTokenWithCode($_REQUEST["code"]);
+        $mailUp->retreiveAccessTokenWithCode($_REQUEST["code"]);
     }
     
     // Calling Method
     $callResult = "";
     if (isset($_REQUEST["CallMethod"])) { // CallMethod button clicked
         try {
-			
             $callResult = $mailUp->callMethod($_REQUEST["lstEndpoint"] . $_REQUEST["txtPath"],
                                               $_REQUEST["lstVerb"],
                                               $_REQUEST["txtBody"],
@@ -382,7 +380,7 @@ MailUp Demo Client
 <tr>
 <td><select name="lstVerb">
 <option value="GET">GET</option>
-<option value="GET">POST</option>
+<option value="POST">POST</option>
 </select></td>
 <td><select name="lstContentType">
 <option value="JSON">JSON</option>

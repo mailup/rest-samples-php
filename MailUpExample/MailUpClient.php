@@ -141,11 +141,13 @@
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             $result = curl_exec($curl);
             $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
             
-            if ($code != 200 && $code != 302) throw new MailUpException($code, $ex->getMessage());
+            if ($code != 200 && $code != 302) throw new MailUpException($code, "Authorization error");
             
             $result = json_decode($result);
             
@@ -164,11 +166,13 @@
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             $result = curl_exec($curl);
             $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
             
-            if ($code != 200 && $code != 302) throw new MailUpException($code, $ex->getMessage());
+            if ($code != 200 && $code != 302) throw new MailUpException($code, "Authorization error");
             
             $result = json_decode($result);
             
@@ -186,6 +190,8 @@
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/x-www-form-urlencoded", "Content-length: " . strlen($body)));
@@ -193,7 +199,7 @@
             $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
             
-            if ($code != 200 && $code != 302) throw new MailUpException($code, $ex->getMessage());
+            if ($code != 200 && $code != 302) throw new MailUpException($code, "Authorization error");
             
             $result = json_decode($result);
             
@@ -212,6 +218,8 @@
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             if ($verb == "POST") {
                 curl_setopt($curl, CURLOPT_POST, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
@@ -240,7 +248,8 @@
             if ($code == 401 && $refresh == true) {
                 $this->refreshAccessToken();
                 return $this->callMethod($url, $verb, $body, $contentType, false);
-            } else if ($code != 200 && $code != 302) throw new MailUpException($code, $ex->getMessage());
+            } else if ($code == 401 && $refresh == false) throw new MailUpException($code, "Authorization error");
+             else if ($code != 200 && $code != 302) throw new MailUpException($code, "Unknown error");
             
             return $result;
         }
