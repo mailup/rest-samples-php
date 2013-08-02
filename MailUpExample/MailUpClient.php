@@ -114,7 +114,7 @@
         
         function MailUpClient($inClientId, $inClientSecret, $inCallbackUri) {
             $this->logonEndpoint = "https://services.mailup.com/Authorization/OAuth/LogOn";
-            $this->authorizationEndpoint = "https://services.mailup.com/Authorization/Authorization";
+            $this->authorizationEndpoint = "https://services.mailup.com/Authorization/OAuth/Authorization";
             $this->tokenEndpoint = "https://services.mailup.com/Authorization/OAuth/Token";
             $this->consoleEndpoint = "https://services.mailup.com/API/v1/Rest/ConsoleService.svc";
             $this->mailstatisticsEndpoint = "https://services.mailup.com/API/v1/Rest/MailStatisticsService.svc";
