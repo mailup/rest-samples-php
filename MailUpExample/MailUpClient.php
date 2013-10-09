@@ -134,7 +134,9 @@
             $url = $this->getLogOnUri();
             header("Location: " . $url);
         }
-        
+        function logOnWithPassword($username, $password) {
+        	return $this->retreiveAccessToken($username, $password);
+		}
         function retreiveAccessTokenWithCode($code) {
             $url = $this->getTokenEndpoint() . "?code=" . $code . "&grant_type=authorization_code";
             
@@ -160,15 +162,26 @@
         }
         
         function retreiveAccessToken($login, $password) {
-            $url = $this->getAuthorizationEndpoint() . "?client_id=" . $this->clientId . "&client_secret=" . $this->clientSecret . "&response_type=code" .
-                "&username=" . $login . "&password=" . $password;
+            $url = $this->getTokenEndpoint();
             
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-            $result = curl_exec($curl);
+            curl_setopt($curl, CURLOPT_POST, 1);
+
+			$body = "grant_type=password&username=".$login."&password=".$password."&client_id=".$this->clientId."&client_secret=".$this->clientSecret;
+		
+			$headers = array();
+			$headers["Content-length"] = strlen($body);
+			$headers["Accept"] = "application/json";
+			$headers["Authorization"] = "Basic ".base64_encode($this->clientId.":".$this->clientSecret);
+			
+			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
+			
+			$result = curl_exec($curl);
             $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
             
@@ -176,9 +189,10 @@
             
             $result = json_decode($result);
             
-            $authCode = $result->code;
+            $this->accessToken = $result->access_token;
+            $this->refreshToken = $result->refresh_token;
             
-            $this->retreiveAccessTokenWithCode($authCode);
+            $this->saveToken();
             
             return $this->accessToken;
         }

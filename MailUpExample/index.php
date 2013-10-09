@@ -1,11 +1,10 @@
 <?php
-  
     require_once 'MailUpClient.php';
     
     $MAILUP_CLIENT_ID = "5a800771-0fb1-4763-977b-736a945f73cd";
     $MAILUP_CLIENT_SECRET = "bfe2ec3c-acab-4149-9297-a5901e5b244e";
     $MAILUP_CALLBACK_URI = "http://127.0.0.1/index.php";
-    
+	
     // Initializing MailUpClient
     $mailUp = new MailUpClient($MAILUP_CLIENT_ID, $MAILUP_CLIENT_SECRET, $MAILUP_CALLBACK_URI);
     
@@ -15,7 +14,9 @@
     } else if (isset($_REQUEST["code"])) { // code returned by MailUp
         $mailUp->retreiveAccessTokenWithCode($_REQUEST["code"]);
     }
-    
+    if (isset($_REQUEST["LogOnWithPassword"])) { // LogOnWithPassword button clicked
+        $mailUp->logOnWithPassword($_REQUEST["txtUsr"],$_REQUEST["txtPwd"]);
+    }
     // Calling Method
     $callResult = "";
     if (isset($_REQUEST["CallMethod"])) { // CallMethod button clicked
@@ -365,6 +366,11 @@ MailUp Demo Client
 <form action="index.php" method="POST">
 <p>
 <input type="submit" name="LogOn" value="Sign in to MailUp"/>
+</p>
+<p>
+Username: <input type="text" name="txtUsr" value="type your MailUp username" style="width:400px;"/><br/>
+Password: <input type="text" name="txtPwd" value="type your MailUp password" style="width:400px;"/><br/>
+<input type="submit" name="LogOnWithPassword" value="Sign in to MailUp using Password flow"/>
 </p>
 
 <p id="pAuthorization"><?php echo ($mailUp->getAccessToken()==null)?"Unauthorized":("Authorized. Token: ".$mailUp->getAccessToken()) ?></p><br /><br />
