@@ -21,10 +21,12 @@
     $callResult = "";
     if (isset($_REQUEST["CallMethod"])) { // CallMethod button clicked
         try {
-            $callResult = $mailUp->callMethod($_REQUEST["lstEndpoint"] . $_REQUEST["txtPath"],
+		$vartext = preg_replace("/\r\n|\r|\n/", ' ', $_REQUEST["txtBody"]);
+		$callResult = $mailUp->callMethod($_REQUEST["lstEndpoint"] . $_REQUEST["txtPath"],
                                               $_REQUEST["lstVerb"],
-                                              $_REQUEST["txtBody"],
+                                              $vartext,
                                               $_REQUEST["lstContentType"]);
+		
         } catch (MailUpException $ex) {
             $callResult = "Exception with code " . $ex->getStatusCode() . " and message: " . $ex->getMessage();
         }
@@ -386,7 +388,9 @@ Password: <input type="text" name="txtPwd" value="type your MailUp password" sty
 <tr>
 <td><select name="lstVerb">
 <option value="GET">GET</option>
+<option value="PUT">PUT</option>
 <option value="POST">POST</option>
+<option value="DELETE">DELETE</option>
 </select></td>
 <td><select name="lstContentType">
 <option value="JSON">JSON</option>
