@@ -23,11 +23,11 @@ This project encloses a short list of pre definied samples describing some of th
 * Sample 1   - Importing recipients into a new group
 * Sample 2   - Unsubscribing a recipient from a group
 * Sample 3   - Updating a recipient information
-* Sample 4   - Creating a message from an exisiting template
-* Sample 5   - Building a message with images and attachements
+* Sample 4   - Creating a message from a custom template ( at least one template must be saved on list 1 )
+* Sample 5   - Building a message with images and attachments
 * Sample 6   - Tagging an email message
 * Sample 7   - Sending an email message
-* Sample 8   - Displaying statistics with regards to sample 7
+* Sample 8   - Displaying statistics with regards to message created in sample 4 or 5 and/or sent out in sample 7
 
 Debugging tool 
 ------------------------
