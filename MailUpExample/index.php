@@ -169,23 +169,43 @@
             // Get the available template list
             $url = $mailUp->getConsoleEndpoint() . "/Console/List/1/Templates";
             $result = $mailUp->callMethod($url, "GET", null, "JSON");
-            $result = json_decode($result);
+
+
+            /*
+
+            echo $result;
+
+            exit;
+
+            */
+
+            $result = json_decode($result) ;
             
             $exampleResult .= "Get the available template list<br/>GET ".$url." - OK<br/>";
             
             $templateId = -1;
-            if (count($result) > 0) $templateId = $result[0]->Id;
-            
+
+            $items = null;
+
+            if (count($result) > 0) 
+            {
+                $templateId  = $result->Items[1]->Id;
+            }
+
             // Create the new message
             $url = $mailUp->getConsoleEndpoint() . "/Console/List/1/Email/Template/" . $templateId;
             $result = $mailUp->callMethod($url, "POST", null, "JSON");
+
             $result = json_decode($result);
-            
+
             $exampleResult .= "Create the new message<br/>POST ".$url." - OK<br/>";
             
-            if (count($result->Items) > 0) {
-                $emailId = $result->Items[0]->idMessage;
+
+
+            if (count($result) > 0) {
+                $emailId = $result->idMessage;
             }
+
             $_SESSION["emailId"] = $emailId;
             
             // Request for messages list
@@ -206,7 +226,7 @@
         try {
             
             // Image bytes can be obtained from file, database or any other source
-            $img = file_get_contents("http://images.apple.com/home/images/ios_title_small.png");
+            $img = file_get_contents("https://www.google.it/images/srpr/logo11w.png");
             $img = base64_encode($img);
             
             // Upload an image
@@ -241,8 +261,8 @@
             
             $exampleResult .= "Create and save \"hello\" message<br/>POST ".$url." - OK<br/>";
             
-            if (count($result->Items) > 0) {
-                $emailId = $result->Items[0]->idMessage;
+            if (count($result) > 0) {
+                $emailId = $result->idMessage;
             }
             $_SESSION["emailId"] = $emailId;
             
@@ -275,12 +295,15 @@
             // Create a new tag
             $url = $mailUp->getConsoleEndpoint() . "/Console/List/1/Tag";
             $result = $mailUp->callMethod($url, "POST", "\"test tag\"", "JSON");
+
             $result = json_decode($result);
             
+
+
             $exampleResult .= "Create a new tag<br/>POST ".$url." - OK<br/>";
             
             $tagId = -1;
-            if (count($result) > 0) $tagId = $result[0]->Id;
+            if (count($result) > 0) $tagId = $result->Id;
             
             // Pick up a message and retrieve detailed informations
             $url = $mailUp->getConsoleEndpoint() . "/Console/List/1/Email/" . $emailId;
@@ -339,7 +362,7 @@
             
             // Request (to MailStatisticsService.svc) for paged message views list for the previously sent message
             $hours = 4;
-            $url = $mailUp->getMailstatisticsEndpoint() . "/Message/" . $emailId . "/Views/List/Last/" . $hours . "?pageSize=5&pageNum=0";
+            $url = $mailUp->getMailstatisticsEndpoint() . "/Message/" . $emailId . "/List/Views?pageSize=5&pageNum=0";
             $result = $mailUp->callMethod($url, "GET", null, "JSON");
             
             $exampleResult .= "Request (to MailStatisticsService.svc) for paged message views list for the previously sent message<br/>GET ".$url." - OK<br/>";
