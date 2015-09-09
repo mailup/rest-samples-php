@@ -22,7 +22,7 @@
     if (isset($_REQUEST["CallMethod"])) { // CallMethod button clicked
         try {
 		$vartext = preg_replace("/\r\n|\r|\n/", ' ', $_REQUEST["txtBody"]);
-		$callResult = $mailUp->callMethod($_REQUEST["lstEndpoint"] . $_REQUEST["txtPath"],
+		$callResult = $mailUp->callMethod($_REQUEST["lstEndpoint"] . str_replace(' ','%20', $_REQUEST["txtPath"] ),
                                               $_REQUEST["lstVerb"],
                                               $vartext,
                                               $_REQUEST["lstContentType"]);
