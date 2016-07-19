@@ -112,7 +112,7 @@
             $this->refreshToken = $inRefreshToken;
         }
         
-        function MailUpClient($inClientId, $inClientSecret, $inCallbackUri) {
+        function __construct($inClientId, $inClientSecret, $inCallbackUri) {
             $this->logonEndpoint = "https://services.mailup.com/Authorization/OAuth/LogOn";
             $this->authorizationEndpoint = "https://services.mailup.com/Authorization/OAuth/Authorization";
             $this->tokenEndpoint = "https://services.mailup.com/Authorization/OAuth/Token";
