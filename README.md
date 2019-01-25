@@ -6,15 +6,16 @@ Requirements
 ------------------------
 * Apache web server 
 * A valid MailUp account ( trial accounts allowed )
-* API application keys ( required only for final deployments )
+* Your own API application keys [Get API application keys] [1] 
 
 
 notes : 
-* For further API information, please visit [MailUp REST API Help] [1] 
-* For MailUp trial account activation please go to [MailUp web site] [2] 
+* For further API information, please visit [MailUp REST API Help] [2] 
+* For MailUp trial account activation please go to [MailUp web site] [3] 
 
-  [1]: http://help.mailup.com/display/mailupapi/REST+API        "MailUp REST API Help"
-  [2]: http://www.mailup.com/p/pc/mailup-free-trial-d44.htm        "MailUp web site"
+  [1]: http://help.mailup.com/display/mailupapi/Get+a+Developer+Account        "Get API application keys" 
+  [2]: http://help.mailup.com/display/mailupapi/REST+API        "MailUp REST API Help"
+  [3]: http://www.mailup.com/p/pc/mailup-free-trial-d44.htm        "MailUp web site"  
   
 Samples overview 
 ------------------------
@@ -29,18 +30,21 @@ This project encloses a short list of pre definied samples describing some of th
 * Sample 7   - Sending an email message
 * Sample 8   - Displaying statistics with regards to message created in sample 4 or 5 and/or sent out in sample 7
 
+Before starting 
+------------------------
+Now you have created a MailUp account and your API application keys, please set them into your local config file. You can find the path of the config file here: 
+```
+rest-samples-php/config/auth.php      
+``` 
+
 Debugging tool 
 ------------------------
 
-
 Notes
 ------------------------
-We highly recommend to make use of the application API keys for test purposes and when running on staging environments only.
-If the code enclosed in the samples should ever run in production environments instead, we'd love you to get your personal free API keys.
+If you're interested to claim your API keys, please read more at the page [MailUp REST API Keys and endpoints] [4] 
 
-If you're interested to claim your API keys, please read more at the page [MailUp REST API Keys and endpoints] [3] 
-
-  [3]: http://help.mailup.com/display/mailupapi/All+API+Keys+and+Endpoints+in+one+page        "MailUp REST API Keys and endpoints"
+  [4]: http://help.mailup.com/display/mailupapi/All+API+Keys+and+Endpoints+in+one+page        "MailUp REST API Keys and endpoints"
 
 Revision history
 ------------------------
