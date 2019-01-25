@@ -6,16 +6,13 @@ Requirements
 ------------------------
 * Apache web server 
 * A valid MailUp account ( trial accounts allowed )
-* Your own API application keys [Get API application keys] [1] 
+* Your own API application keys 
 
 
 notes : 
-* For further API information, please visit [MailUp REST API Help] [2] 
-* For MailUp trial account activation please go to [MailUp web site] [3] 
-
-  [1]: http://help.mailup.com/display/mailupapi/Get+a+Developer+Account        "Get API application keys" 
-  [2]: http://help.mailup.com/display/mailupapi/REST+API        "MailUp REST API Help"
-  [3]: http://www.mailup.com/p/pc/mailup-free-trial-d44.htm        "MailUp web site"  
+* For further API information, please visit [MailUp REST API Help](http://help.mailup.com/display/mailupapi/REST+API) 
+* For MailUp trial account activation please go to [MailUp web site](http://www.mailup.com/p/pc/mailup-free-trial-d44.htm)
+* For further API application keys information please go to [Get API application keys](http://help.mailup.com/display/mailupapi/Get+a+Developer+Account)
   
 Samples overview 
 ------------------------
@@ -32,7 +29,7 @@ This project encloses a short list of pre definied samples describing some of th
 
 Before starting 
 ------------------------
-Now you have created a MailUp account and your API application keys, please set them into your local config file. You can find the path of the config file here: 
+After you get the MailUp account ID and the API application keys, please set them into your local config file. You can find the path of the config file here:
 ```
 rest-samples-php/config/auth.php      
 ``` 
@@ -42,9 +39,7 @@ Debugging tool
 
 Notes
 ------------------------
-If you're interested to claim your API keys, please read more at the page [MailUp REST API Keys and endpoints] [4] 
-
-  [4]: http://help.mailup.com/display/mailupapi/All+API+Keys+and+Endpoints+in+one+page        "MailUp REST API Keys and endpoints"
+To learn more about API keys and how to get them, please refer to [MailUp REST API Keys and endpoints](http://help.mailup.com/display/mailupapi/All+API+Keys+and+Endpoints+in+one+page) 
 
 Revision history
 ------------------------
