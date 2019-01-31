@@ -77,6 +77,7 @@ class MailUpClient
         curl_close($curl);
         
         if ($response_code !== 200 & $response_code !== 302) {
+			$this->clearToken();
             throw new MailUpException($code, "Authorization error");
         }
         
@@ -113,6 +114,7 @@ class MailUpClient
         curl_close($curl);
         
         if ($code !== 200 & $code !== 302) {
+			$this->clearToken();
             throw new MailUpException($code, "Authorization error");
         }
         
@@ -144,6 +146,7 @@ class MailUpClient
         curl_close($curl);
         
         if ($code != 200 && $code != 302) {
+			$this->clearToken();
             throw new MailUpException($code, "Authorization error");
         }
         
@@ -239,7 +242,17 @@ class MailUpClient
         }
     }
     
-    private function saveToken($token, $refresh, $time)
+    private function clearToken()
+	{
+		$this->accessToken = null;
+        $this->refreshToken = null;
+        $this->tokenTime = null;
+
+        setcookie("access_token", $this->accessToken, $this->tokenTime);
+        setcookie("refresh_token", $this->refreshToken, $this->tokenTime);
+        setcookie("token_time", $this->tokenTime, $this->tokenTime);
+	}	
+	private function saveToken($token, $refresh, $time)
     {
         $this->accessToken = $token;
         $this->refreshToken = $refresh;
