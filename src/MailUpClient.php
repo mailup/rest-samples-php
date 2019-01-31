@@ -98,17 +98,17 @@ class MailUpClient
         $username = DataFilter::convertToString($username);
         $password = DataFilter::convertToString($password);
 
-        $body = 'grant_type=password&username=' . $username . '&password=' . $password . '&client_id=' . $this->clientId . '&client_secret=' . $this->secretKey;
+        $body = 'grant_type=password&username=' . rawurlencode($username) . '&password=' . rawurlencode($password) . '&client_id=' . rawurlencode($this->clientId) . '&client_secret=' . rawurlencode($this->secretKey);
         $headers = array(
             "Content-type: application/x-www-form-urlencoded",
             "Content-length: " . strlen($body),
             "Accept: application/json",
-            "Authorization: Basic " . base64_encode($this->clientId  . ':' . $this->secretKey)
+            "Authorization: Basic " . base64_encode($this->clientId . ':' . $this->secretKey)
         );
         
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
-        
+
         $result = curl_exec($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
@@ -125,7 +125,7 @@ class MailUpClient
     
     public function refreshToken()
     {
-        $body = "client_id=" . $this->clientId . "&client_secret=" . $this->secretKey . "&refresh_token=" . $this->refreshToken . "&grant_type=refresh_token";
+        $body = "client_id=" . rawurlencode($this->clientId) . "&client_secret=" . rawurlencode($this->secretKey) . "&refresh_token=" . rawurlencode($this->refreshToken) . "&grant_type=refresh_token";
         $headers = array(
             "Content-type: application/x-www-form-urlencoded",
             "Content-length: " . strlen($body),
